@@ -4,7 +4,7 @@ const {Device, DeviceInfo} = require('../models/model')
 const ApiError = require('../error/ApiError')
 
 class DeviceController {
-    async create(req, res) {
+    async create(req, res, next) {
        try {
         let {name, price, brandId, typeId, info} = req.body
         const {img} = req.files
@@ -23,8 +23,8 @@ class DeviceController {
                 deviceId: device.id
               })  
             })
-        }
-
+        } 
+ 
         return res.json(device)
        } catch (e) {
         next(ApiError.badRequest(e.message))
